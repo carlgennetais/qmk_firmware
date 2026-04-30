@@ -23,7 +23,7 @@ enum layers {
     WIN_BASE,
     WIN_FN,
     EXTEND,
-    SYMBOL,
+    MOUSE,
 };
 
 #define FN_MAC MO(MAC_FN)
@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  FN_WIN,   KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
-    [SYMBOL] = LAYOUT_ansi_82(
+    [MOUSE] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  UG_VALD,  UG_VALU,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,            UG_TOGG,
         _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
         UG_TOGG,  UG_NEXT,  UG_VALU,  UG_HUEU,  UG_SATU,  UG_SPDU,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
@@ -88,6 +88,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [WIN_FN]   = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
     [EXTEND] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [SYMBOL]   = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
+    [MOUSE]   = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
 };
 #endif // ENCODER_MAP_ENABLE
