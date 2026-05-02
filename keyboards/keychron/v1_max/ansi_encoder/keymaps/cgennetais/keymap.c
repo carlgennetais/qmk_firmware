@@ -22,10 +22,10 @@ enum layers {
 #define HRM_S MT(MOD_LALT,KC_S)
 #define HRM_D MT(MOD_LSFT,KC_D)
 #define HRM_F MT(MOD_LCTL,KC_F)
-#define HRM_J MT(MOD_LGUI,KC_J)
-#define HRM_K MT(MOD_LALT,KC_K)
-#define HRM_L MT(MOD_LSFT,KC_L)
-#define HRM_SCL MT(MOD_LCTL,KC_SCLN)
+#define HRM_J MT(MOD_LCTL,KC_J)
+#define HRM_K MT(MOD_LSFT,KC_K)
+#define HRM_L MT(MOD_LALT,KC_L)
+#define HRM_SCL MT(MOD_LGUI,KC_SCLN)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
