@@ -72,21 +72,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  FN_WIN,   KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,    KC_PDOT            ),
 
     [MOUSE] = LAYOUT_ansi_98(
-        _______,            KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  UG_VALD,  UG_VALU,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,            _______,  _______,  _______,    UG_TOGG,
-        _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,    _______,
-        UG_TOGG,  UG_NEXT,  UG_VALU,  UG_HUEU,  UG_SATU,  UG_SPDU,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,    _______,
-        _______,  UG_PREV,  UG_VALD,  UG_HUED,  UG_SATD,  UG_SPDD,  _______,  _______,  _______,  _______,  _______,  _______,            _______,            _______,  _______,  _______,
-        _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,    _______,
+        _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,    UG_TOGG,
+        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,    _______,
+        _______,  _______,  _______,  _______,  _______,  _______,  MS_WHLL,  MS_WHLU,  MS_WHLD,  MS_WHLR,  _______,  _______,  _______,  _______,            _______,  _______,  _______,    _______,
+        _______,  KC_LGUI,  KC_LALT,  KC_LFST,  KC_LCTL,  _______,  MS_LEFT,  MS_DOWN,  MS_UP,    MS_RGHT,  _______,  _______,            _______,            _______,  _______,  _______,
+        _______,            _______,  _______,  _______,  _______,  _______,  MS_BTN1,  MS_BTN3,  MS_BTN2,  _______,  _______,            _______,  _______,  _______,  _______,  _______,    _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______            ),
  };
+
+// macros
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case MC_0: // unused
+                SEND_STRING(SS_DOWN(X_LCTL)SS_UP(X_LCTL));
+                return false;
+            case MC_1: // go forward in history
+                SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_LEFT)SS_UP(X_LALT));
+                return false;
+            case MC_2: // go back in history
+                SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_RGHT)SS_UP(X_LALT));
+                return false;
+            case MC_3: // next tab
+                SEND_STRING(SS_DOWN(X_LCTL)SS_TAP(X_PGUP)SS_UP(X_LCTL));
+                return false;
+            case MC_4: // prev tab
+                SEND_STRING(SS_DOWN(X_LCTL)SS_TAP(X_PGDN)SS_UP(X_LCTL));
+                return false;
+        }
+    }
+    return true;
+};
+
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [MAC_FN] = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
+    [MAC_FN]   = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
     [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [WIN_FN] = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
-    [EXTEND] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [MOUSE] = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
+    [WIN_FN]   = {ENCODER_CCW_CW(UG_VALD, UG_VALU)},
+    [EXTEND]   = {ENCODER_CCW_CW(KC_LEFT, KC_RGHT)},
+    [MOUSE]    = {ENCODER_CCW_CW(KC_LEFT, KC_RGHT)},
 };
 #endif // ENCODER_MAP_ENABLE
